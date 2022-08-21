@@ -159,7 +159,7 @@ class _OrderPageState extends State<OrderPage> {
                                 divider20(),
                                 TextNormal(
                                   text:
-                                      "Aún no has agregado productos a la lista.",
+                                      "Aún no has agregado productos a la lista",
                                 ),
                               ],
                             ),
