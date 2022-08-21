@@ -11,7 +11,7 @@ import 'menu_page.dart';
 import 'order_page.dart';
 
 class InitPage extends StatefulWidget {
-  const InitPage({Key? key}) : super(key: key);
+
 
   @override
   State<InitPage> createState() => _InitPageState();
@@ -20,13 +20,15 @@ class InitPage extends StatefulWidget {
 class _InitPageState extends State<InitPage> {
   int _currentIndex = 0;
 
+
   final List<Widget> _pages = [
     const HomeCustomerPage(),
      MenuPage(),
-    const OrderPage(),
+     OrderPage(),
 
     ProfilePage(),
   ];
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -98,6 +100,7 @@ class _InitPageState extends State<InitPage> {
                     builder: (BuildContext context, AsyncSnapshot snap) {
                       if (snap.hasData) {
                         int counter = snap.data;
+
                         return counter > 0 ? Container(
                           padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(

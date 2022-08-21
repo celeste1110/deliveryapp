@@ -13,8 +13,6 @@ import '../../ui/widgets/item_order_widget.dart';
 import '../../ui/widgets/text_widget.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({Key? key}) : super(key: key);
-
   @override
   State<OrderPage> createState() => _OrderPageState();
 }
@@ -63,11 +61,9 @@ class _OrderPageState extends State<OrderPage> {
                 padding: EdgeInsets.all(14.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-
                   children: [
                     divider10(),
                     divider6(),
-
                     Center(
                       child: TextGeneral(
                         text: 'My Cart',
@@ -110,8 +106,8 @@ class _OrderPageState extends State<OrderPage> {
                             ),
                             divider6(),
                             Container(
-                              padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
@@ -127,6 +123,12 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                     ),
                     divider20(),
+                    TextGeneral(
+                        text: 'Your Order',
+                        fontSize: 18,
+                        color: kBrandPrimaryColor,
+                        fontWeight: FontWeight.w700),
+                    divider12(),
                     OrderService().ordersLength > 0
                         ? ListView.builder(
                             physics: const ScrollPhysics(),

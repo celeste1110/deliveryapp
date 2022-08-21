@@ -11,11 +11,19 @@ class OrderStreamService{
 
   int _counter = 0;
 
-  final StreamController<int> _counterStreamController = StreamController.broadcast();
+   late StreamController<int> _counterStreamController = StreamController.broadcast();
+  //late StreamController<int> _counterStreamController ;
 
   Stream<int> get counterStream => _counterStreamController.stream;
 
   int get counter => _counter;
+
+
+//   crear(){
+//
+//        _counterStreamController =  StreamController.broadcast();
+//
+// }
 
   addCounter(){
     _counter++;

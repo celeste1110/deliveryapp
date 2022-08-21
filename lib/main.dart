@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deliveryapp/pages/customer/init_page.dart';
 import 'package:flutter_deliveryapp/pages/login_page.dart';
+import 'package:flutter_deliveryapp/services/order_service.dart';
+import 'package:flutter_deliveryapp/services/order_stream_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'helpers/sp_global.dart';
@@ -10,6 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SPGlobal _prefs = SPGlobal();
   await _prefs.initShared();
+  // OrderStreamService _counterStreamController=OrderStreamService();
+  // _counterStreamController.crear();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

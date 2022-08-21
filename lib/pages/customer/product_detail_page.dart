@@ -274,9 +274,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       decoration: BoxDecoration(
                         // color: kBrandPrimaryColor.withOpacity(0.3),
                         color: quantity > 1
-                            ? kBrandPrimaryColor
-                            : kBrandPrimaryColor.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(14.0),
+                            ? kBrandPrimaryColor.withOpacity(0.3)
+                            : kBrandPrimaryColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: const Icon(
                         Icons.remove,
@@ -309,8 +309,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       height: 50,
                       width: 50,
                       decoration: BoxDecoration(
-                        color: kBrandPrimaryColor,
-                        borderRadius: BorderRadius.circular(14.0),
+                        color: kBrandSecondaryColor.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
                       child: const Icon(
                         Icons.add,
@@ -328,7 +328,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               borderRadius: BorderRadius.circular(14.0),
                               side: BorderSide.none,
                             ),
-                            primary: kBrandPrimaryColor),
+                            primary: kBrandSecondaryColor),
                         child: const Text(
                           "Agregar orden",
                           style: TextStyle(

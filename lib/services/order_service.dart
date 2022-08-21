@@ -9,6 +9,10 @@ class OrderService {
 
   List<ProductOrderModel> _orders = [];
 
+  eliminar(){
+    _orders = [];
+  }
+
   int get ordersLength => _orders.length;
 
   List<ProductOrderModel> get getOrders => _orders;
