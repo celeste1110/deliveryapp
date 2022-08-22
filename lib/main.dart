@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_deliveryapp/pages/admin/home_admin_page.dart';
 import 'package:flutter_deliveryapp/pages/customer/init_page.dart';
 import 'package:flutter_deliveryapp/pages/login_page.dart';
 import 'package:flutter_deliveryapp/services/order_service.dart';
@@ -44,6 +45,6 @@ class PreInit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _prefs.isLogin ? InitPage() : LoginPage();
+    return !_prefs.isLogin ?  LoginPage(): _prefs.role=='customer' ?  InitPage(): HomeAdminPage();
   }
 }
