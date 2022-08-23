@@ -47,7 +47,7 @@ class _ProductAdminPageState extends State<ProductAdminPage> {
     return Scaffold(
       appBar: AppBar(
         title: TextGeneral(
-          text: 'Products',
+          text: 'Productos',
           fontSize: 25,
           color: Colors.white,
           fontWeight: FontWeight.w500,

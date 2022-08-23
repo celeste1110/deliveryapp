@@ -54,13 +54,13 @@ class _ProductFormPageState extends State<ProductFormPage> {
   bool isLoading = true;
 
   CollectionReference _collectionReference =
-  FirebaseFirestore.instance.collection('tasks');
+      FirebaseFirestore.instance.collection('tasks');
 
   final FirestoreService _categoryService =
-  FirestoreService(collection: "categories");
+      FirestoreService(collection: "categories");
 
   final FirestoreService _productService =
-  FirestoreService(collection: "products");
+      FirestoreService(collection: "products");
 
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
@@ -109,7 +109,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     firebase_storage.Reference _reference = _storage.ref().child("products");
     String time = DateTime.now().toString();
     firebase_storage.TaskSnapshot uploadTask =
-    await _reference.child("$time.jpg").putFile(File(_image!.path));
+        await _reference.child("$time.jpg").putFile(File(_image!.path));
     String url = await uploadTask.ref.getDownloadURL();
     return url;
   }
@@ -187,9 +187,11 @@ class _ProductFormPageState extends State<ProductFormPage> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: TextGeneral(
-          text: "${widget.productModel == null ? 'Agregar' : 'Actualizar'} producto",
+          text:
+              "${widget.productModel == null ? 'Agregar' : 'Actualizar'} producto",
           fontSize: 25,
           color: Colors.white,
           fontWeight: FontWeight.w500,
@@ -213,19 +215,24 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextNormal(text: "Nombre del producto:"),
+                    divider12(),
+                    TextNormal(text: "Nombre del producto:",color: kBrandSecondaryColor),
+
                     TextFielWidget(
                       hintText: "Nombre del producto",
                       controller: _nameController,
                     ),
+                    divider6(),
+                    TextNormal(text: "Descripción:",color: kBrandSecondaryColor),
                     TextFielWidget(
                       hintText: "Descripción",
                       maxLines: 4,
                       controller: _descriptionController,
                     ),
+                    divider6(),
                     Row(
                       children: [
-                        TextNormal(text: " Categoría:"),
+                        TextNormal(text: "Categoría:",color: kBrandSecondaryColor),
                       ],
                     ),
                     divider6(),
@@ -235,7 +242,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Color(0xff262A34).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(14.0),
                         boxShadow: [
                           BoxShadow(
@@ -252,12 +259,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                           items: widget.categories
                               .map(
                                 (e) => DropdownMenuItem(
-                              value: e.id,
-                              child: TextNormal(
-                                text: e.category,
-                              ),
-                            ),
-                          )
+                                  value: e.id,
+                                  child: TextNormal(
+                                    text: e.category,
+                                  ),
+                                ),
+                              )
                               .toList(),
                           onChanged: (String? value) {
                             categoryValue = value!;
@@ -267,52 +274,86 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       ),
                     ),
                     divider20(),
+
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextNormal(text: "Precio:",color: kBrandSecondaryColor),
+                              TextFielWidget(
+                                hintText: "Precio",
+                                isNumeric: true,
+                                controller: _priceController,
+                              ),
+                            ],
+                          ),
+                        ),
+                        dividerWidth10,
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextNormal(text: "Descuento:",color: kBrandSecondaryColor),
+                              TextFielWidget(
+                                hintText: "Descuento",
+                                isNumeric: true,
+                                controller: _discountController,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    divider10(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextNormal(text: "Tiempo:",color: kBrandSecondaryColor),
+                              TextFielWidget(
+                                hintText: "Tiempo",
+                                isNumeric: true,
+                                controller: _timeController,
+                              ),
+                            ],
+                          ),
+                        ),
+                        dividerWidth10,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextNormal(text: "Porciones:",color: kBrandSecondaryColor),
+                              TextFielWidget(
+                                hintText: "Porciones",
+                                isNumeric: true,
+                                controller: _servingController,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                     divider6(),
                     Row(
                       children: [
                         Expanded(
-                          child: TextFielWidget(
-                            hintText: "Precio",
-                            isNumeric: true,
-                            controller: _priceController,
-                          ),
-                        ),
-                        dividerWidth10,
-                        Expanded(
-                          child: TextFielWidget(
-                            hintText: "Descuento",
-                            isNumeric: true,
-                            controller: _discountController,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFielWidget(
-                            hintText: "Tiempo",
-                            isNumeric: true,
-                            controller: _timeController,
-                          ),
-                        ),
-                        dividerWidth10,
-                        Expanded(
-                          child: TextFielWidget(
-                            hintText: "Porciones",
-                            isNumeric: true,
-                            controller: _servingController,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFielWidget(
-                            hintText: "Calificación",
-                            isNumeric: true,
-                            controller: _rateController,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextNormal(text: "Calificación:",color: kBrandSecondaryColor),
+                              TextFielWidget(
+                                hintText: "Calificación",
+                                isNumeric: true,
+                                controller: _rateController,
+                              ),
+                            ],
                           ),
                         ),
                         dividerWidth10,
@@ -328,9 +369,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         endIndent: 20.0,
                       ),
                     ),
-                    TextNormal(
-                      text: "Ingredientes",
-                    ),
+                    TextNormal(text: "Ingredientes:",color: kBrandSecondaryColor),
                     divider12(),
                     Row(
                       children: [
@@ -365,56 +404,56 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     ),
                     _ingredients.isNotEmpty
                         ? Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 12.0,
-                            offset: const Offset(4, 4),
-                          )
-                        ],
-                      ),
-                      child: ListView.builder(
-                        physics: const ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _ingredients.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: TextNormal(text: _ingredients[index]),
-                            trailing: IconButton(
-                              icon: SvgPicture.asset(
-                                'assets/icons/trash.svg',
-                                height: 18.0,
-                                color:
-                                kBrandPrimaryColor.withOpacity(0.8),
-                              ),
-                              onPressed: () {
-                                _ingredients.removeAt(index);
-                                setState(() {});
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 12.0,
+                                  offset: const Offset(4, 4),
+                                )
+                              ],
+                            ),
+                            child: ListView.builder(
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: _ingredients.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: TextNormal(text: _ingredients[index]),
+                                  trailing: IconButton(
+                                    icon: SvgPicture.asset(
+                                      'assets/icons/trash.svg',
+                                      height: 18.0,
+                                      color:
+                                          kBrandPrimaryColor.withOpacity(0.8),
+                                    ),
+                                    onPressed: () {
+                                      _ingredients.removeAt(index);
+                                      setState(() {});
+                                    },
+                                  ),
+                                );
                               },
                             ),
-                          );
-                        },
-                      ),
-                    )
+                          )
                         : Container(
-                        margin: const EdgeInsets.symmetric(vertical: 12.0),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/box.png',
-                              height: 90.0,
-                              color: kBrandPrimaryColor.withOpacity(0.8),
-                            ),
-                            divider6(),
-                            TextNormal(
-                              text: "Aún no hay ingredientes",
-                            ),
-                          ],
-                        )),
-                    divider20(),
+                            margin: const EdgeInsets.symmetric(vertical: 12.0),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/box.png',
+                                  height: 90.0,
+                                  color: kBrandPrimaryColor.withOpacity(0.8),
+                                ),
+                                divider6(),
+                                TextNormal(
+                                  text: "Aún no hay ingredientes",
+                                ),
+                              ],
+                            )),
+                    divider12(),
                     const SizedBox(
                       height: 30.0,
                       child: Divider(
@@ -422,9 +461,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         endIndent: 20.0,
                       ),
                     ),
-                    TextNormal(
-                      text: "Imagen del producto",
-                    ),
+                    TextNormal(text: "Imagen del producto:",color: kBrandSecondaryColor),
                     divider20(),
                     Row(
                       children: [
@@ -436,7 +473,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                 getImageGallery();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xfff72585),
+                                primary: kBrandSecondaryColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.0)),
                               ),
@@ -462,7 +499,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                 getImageCamera();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xff4361ee),
+                                primary: kBrandPrimaryColor.withOpacity(0.6),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
@@ -503,10 +540,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
                           image: _image != null
                               ? FileImage(File(_image!.path))
                               : widget.productModel != null
-                              ? NetworkImage(widget.productModel!.image)
-                              : const AssetImage(
-                              'assets/images/placeholder.png')
-                          as ImageProvider,
+                                  ? NetworkImage(widget.productModel!.image)
+                                  : const AssetImage(
+                                          'assets/images/placeholder.png')
+                                      as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -528,18 +565,18 @@ class _ProductFormPageState extends State<ProductFormPage> {
           ),
           isLoading
               ? Container(
-            color: Colors.white.withOpacity(0.8),
-            child: Center(
-              child: SizedBox(
-                height: 20,
-                width: 20,
-                child: CircularProgressIndicator(
-                  color: kBrandSecondaryColor,
-                  strokeWidth: 2.0,
-                ),
-              ),
-            ),
-          )
+                  color: Colors.white.withOpacity(0.8),
+                  child: Center(
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        color: kBrandSecondaryColor,
+                        strokeWidth: 2.0,
+                      ),
+                    ),
+                  ),
+                )
               : Container(),
         ],
       ),

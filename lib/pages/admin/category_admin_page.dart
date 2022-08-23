@@ -9,10 +9,18 @@ import '../../ui/widgets/floating_button_widget.dart';
 import '../../ui/widgets/general_widget.dart';
 import '../../ui/widgets/item_admin_category_widget.dart';
 import '../../ui/widgets/text_widget.dart';
+import 'category_form_page.dart';
 
-class CategoryAdminPage extends StatelessWidget {
+class CategoryAdminPage extends StatefulWidget {
+  @override
+  State<CategoryAdminPage> createState() => _CategoryAdminPageState();
+}
+
+class _CategoryAdminPageState extends State<CategoryAdminPage> {
   final FirestoreService _categoryService =
   FirestoreService(collection: 'categories');
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,17 @@ class CategoryAdminPage extends StatelessWidget {
         backgroundColor: kBrandSecondaryColor,
       ),
       floatingActionButton: FloatingButtonWidget(
-        onTap: (){},
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoryFormPage(
+
+
+              ),
+            ),
+          );
+        },
       ),
       body: StreamBuilder(
         stream: _categoryService.getStreamCategory(),
@@ -51,8 +69,8 @@ class CategoryAdminPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ItemAdminCategoryWidget(
                   category: categories[index],
-                  onDelete: (){},
-                  onUpdate: (){},
+                  // onDelete: (){},
+                  // onUpdate: (){},
                 );
               },
             );

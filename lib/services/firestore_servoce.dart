@@ -73,8 +73,23 @@ class FirestoreService{
   }
 
 
+//categorias
+  Future<int> deleteCategory(String id) async{
+    await _collectionReference.doc(id).delete();
+    return 1;
+  }
 
+  Future<String> addCategory(CategoryModel categoryModel) async {
+    DocumentReference documentReference = await _collectionReference.add(
+      categoryModel.toJson(),
+    );
+    return documentReference.id;
+  }
 
+  Future<int> updateCategory(CategoryModel categoryModel) async {
+    await _collectionReference.doc(categoryModel.id).update(categoryModel.toJson());
+    return 1;
+  }
 
   Future<String> addUser(UserModel userModel) async{
     try{
